@@ -1,11 +1,11 @@
 import path from  'path';
 
 export default{
+  mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
     debug:true,
-    noInfo: false,
-    mode: 'development'
+    noInfo: false
   },
   entry: [
     path.resolve(__dirname,'src/index')
@@ -19,8 +19,15 @@ export default{
   plugins:[],
   module:{
     rules: [
-      {test: /\.js$/, exclude:'/node-modules', loaders:['babel-loader']},
-      {test: /\.css$/,loaders:['style', 'css']}
+      {
+        test: /\.js$/,
+        exclude:'/node-modules',
+        use:['babel-loader']
+      },
+      {
+        test: /\.css$/,
+        use:['style-loader', 'css-loader']
+      }
     ]
   }
 }
